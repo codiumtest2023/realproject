@@ -1,0 +1,18 @@
+<input
+type="text"
+placeholder="filter"
+class="mb-2 border px-2 py-4 w-full"
+[(ngModel)]="term"
+/>
+<div *ngIf="productService.products">
+<app-product
+  *ngFor="let product of productService.products | filterProduct : term"
+  [product]="product"
+></app-product>
+</div>
+
+<app-modal *ngIf="modalService.isVisible$ | async" title="Create new product">
+<app-create-product></app-create-product>
+</app-modal>
+
+<button (click)="modalService.open()" class="rounded-full bg-red-500 text-white fixed right-5 bottom-5 py-2 px-4">+</button>
